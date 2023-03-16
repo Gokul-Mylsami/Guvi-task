@@ -3,18 +3,10 @@
 $redis = new Redis();
 $redis->connect('127.0.0.1', 6379);
 
-ini_set('session.save_handler', 'redis');
-ini_set('session.save_path', 'tcp://127.0.0.1:6379');
-session_start();
-
 if (isset($_POST['action']) && $_POST['action'] === 'logout') {
    
-    session_unset();
-  
-    // Destroy the session
-    setcookie(session_name(), "", time()-3600, "/");
-    session_destroy();
-  
+    $redisId = $_POST["redisId"];
+    $redis->del("session:$redisId");
     // Return a success message
     $response = array(
         "status" => "success",
@@ -25,8 +17,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'logout') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'valid-session'){
-  
-  if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['email']) && isset($_SESSION['expire_time']) && time() < $_SESSION['expire_time']) {
+  $redisId = $_POST["redisId"];
+  if ($redis->get("session:$redisId")) {
+    $sessionData = $redis->get("session:$redisId");
     $response = array(
         "status" => "success",
         "message" => "Session is valid",
@@ -44,7 +37,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'valid-session'){
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'get-data'){
-  $email = $_SESSION['email'];
+  $redisId = $_POST["redisId"];
+  $sessionData = $redis->get("session:$redisId");
+
+  $email = $sessionData;
+  
 
   $manager = new MongoDB\Driver\Manager("mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/");
   $database = "guvi";

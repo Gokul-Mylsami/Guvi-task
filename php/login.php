@@ -31,10 +31,10 @@ if (mysqli_num_rows($result) == 0) {
     $row = mysqli_fetch_assoc($result);
 
     if(password_verify($password, $row['password'])){
-        session_start();
-        $_SESSION['email'] = $email;
-        $_SESSION['expire_time'] = time() * (5*60);
-        setcookie('PHPSESSID', session_id(), time() + 3600, '/');
+        $session_id = uniqid();
+        $redis->set("session:$session_id", $email);
+        $redis->expire("session:$session_id", 10*60);
+       
 
         $payload = array(
             "email" => $row['email'],
@@ -43,6 +43,7 @@ if (mysqli_num_rows($result) == 0) {
         $response = array(
             "status" => "success",
             "message" => "Login successful",
+            'session_id' => $session_id
         );
         echo json_encode($response);
     } else {

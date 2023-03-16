@@ -13,13 +13,12 @@ $(document).ready(function () {
       url: "../php/login.php",
       data: formData,
 
-      success: function (res) {
+      success: function (response) {
+        let res = JSON.parse(response);
         console.log(res);
-
-        res = JSON.parse(res);
-
         if (res.status == "success") {
           window.location.replace("../profile.html");
+          localStorage.setItem("redisId", res.session_id);
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {

@@ -13,21 +13,29 @@
     <h1>Profile</h1>
 
     <div id="loading-message"><p>Loading....</p></div>
-    <div>
-      <form action="">
-        <div>
-          <label for="">Email : </label>
-          <input type="email" name="email" id="email" disabled />
-        </div>
-        <div>
-          <label for="">DOB : </label>
-          <input type="text" name="dob" id="dob" />
-        </div>
-        <div>
-          <label for="">Age :</label>
-          <input type="text" name="age" id="age" />
-        </div>
-      </form>
+
+    <!-- View Mode -->
+    <div class="view-mode">
+      <p><strong>Email:</strong> John Doe</p>
+      <p><strong>DOB:</strong> john@example.com</p>
+      <p><strong>AGE:</strong> 555-1234</p>
+      <p><strong>CONTACT:</strong> 555-1234</p>
+      <button class="edit-btn">Edit</button>
+    </div>
+
+    <!-- Edit Mode -->
+    <div class="edit-mode" style="display: none">
+      <label for="name-input"><strong>Name:</strong></label>
+      <input type="text" id="name-input" value="John Doe" />
+      <br />
+      <label for="email-input"><strong>Email:</strong></label>
+      <input type="text" id="email-input" value="john@example.com" />
+      <br />
+      <label for="phone-input"><strong>Phone:</strong></label>
+      <input type="text" id="phone-input" value="555-1234" />
+      <br />
+      <button class="save-btn">Save</button>
+      <button class="cancel-btn">Cancel</button>
     </div>
 
     <button class="logout-button" id="logout-button">Logout</button>
