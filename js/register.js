@@ -8,7 +8,7 @@ $("#register-form").submit(function (event) {
   };
   $.ajax({
     type: "POST",
-    url: "http://localhost:8000/php/register.php",
+    url: "../php/register.php",
     data: formData,
 
     success: function (response) {

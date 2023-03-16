@@ -32,9 +32,8 @@ $password = $_POST['password'];
 $password = password_hash($password, PASSWORD_DEFAULT);
 $confirmPassword = $_POST['confirmPassword'];
 
-if (mysqli_query($conn, $sql)) {
-    echo "Table users created successfully";
-} else {
+if (!mysqli_query($conn, $sql)) 
+{
     echo "Error creating table: " . mysqli_error($conn);
 }
 

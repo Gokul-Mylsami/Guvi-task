@@ -10,15 +10,16 @@ $(document).ready(function () {
     console.log(formData);
     $.ajax({
       type: "POST",
-      url: "http://localhost:8000/php/login.php",
+      url: "../php/login.php",
       data: formData,
 
-      success: function (response) {
-        let res = JSON.parse(response);
-        localStorage.setItem("access_token", res.access_token);
+      success: function (res) {
+        console.log(res);
+
+        res = JSON.parse(res);
 
         if (res.status == "success") {
-          window.location.replace("http://localhost:8000/profile.html");
+          window.location.replace("../profile.html");
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {
