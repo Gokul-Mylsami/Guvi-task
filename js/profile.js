@@ -21,7 +21,7 @@ $(document).ready(function () {
   $.ajax({
     url: "../php/profile.php",
     type: "POST",
-
+    data: { action: "get-data" },
     success: function (response) {
       $("#loading-message").hide();
       console.log(response);
