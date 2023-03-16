@@ -67,5 +67,35 @@ if (isset($_POST['action']) && $_POST['action'] === 'get-data'){
   echo json_encode($response);
 }
 
+if (isset($_POST['action']) && $_POST['action'] === 'update-data'){
+  $email = $_POST["email"];
+  $data = $_POST["data"];
+
+  $dob = $data['dob'];
+  $contact = $data['contact'];
+  $age = $data['age'];
+  $manager = new MongoDB\Driver\Manager("mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/");
+  $database = "guvi";
+  $collection = "users";
+  $filter = ['email' => $email];
+  $update = ['$set' => ['age' => $age, 'contact' => $contact , 'dob' => $dob]];
+
+  // specify options
+  $options = ['multi' => false, 'upsert' => false];
+
+  // specify the database and collection to update
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->update($filter, $update, $options);
+  $result = $manager->executeBulkWrite("$database.$collection", $bulk);
+
+  // check if the update was successful
+  if ($result->getModifiedCount() > 0) {
+    $response = ['status' => 'success', 'message' => 'updated successfully'];
+  } else {
+    $response = ['status' => 'error', 'message' => 'update failed'];
+  }
+
+  echo json_encode($response);
+}
 
 ?>

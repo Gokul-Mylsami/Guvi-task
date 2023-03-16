@@ -14,25 +14,28 @@
 
     <div id="loading-message"><p>Loading....</p></div>
 
-    <!-- View Mode -->
+    <!-- view mode -->
     <div class="view-mode">
-      <p><strong>Email:</strong> John Doe</p>
+      <p><strong>Email:</strong></p>
       <p><strong>DOB:</strong> john@example.com</p>
       <p><strong>AGE:</strong> 555-1234</p>
       <p><strong>CONTACT:</strong> 555-1234</p>
       <button class="edit-btn">Edit</button>
     </div>
 
-    <!-- Edit Mode -->
+    <!-- edit mode -->
     <div class="edit-mode" style="display: none">
-      <label for="name-input"><strong>Name:</strong></label>
-      <input type="text" id="name-input" value="John Doe" />
-      <br />
       <label for="email-input"><strong>Email:</strong></label>
-      <input type="text" id="email-input" value="john@example.com" />
+      <input type="text" id="email-input" disabled />
       <br />
-      <label for="phone-input"><strong>Phone:</strong></label>
-      <input type="text" id="phone-input" value="555-1234" />
+      <label for="dob-input"><strong>DOB:</strong></label>
+      <input type="text" id="dob-input" />
+      <br />
+      <label for="age-input"><strong>AGE:</strong></label>
+      <input type="text" id="age-input" />
+      <br />
+      <label for="contact-input"><strong>CONTACT:</strong></label>
+      <input type="text" id="contact-input" />
       <br />
       <button class="save-btn">Save</button>
       <button class="cancel-btn">Cancel</button>

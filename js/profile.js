@@ -1,4 +1,6 @@
-function setData(data) {
+let data;
+
+function setData() {
   $(".view-mode")
     .find("p:eq(0)")
     .html("<strong>Email:</strong> " + data.email);
@@ -22,7 +24,7 @@ $(document).ready(function () {
     data: { action: "valid-session", redisId: localStorage.getItem("redisId") },
     success: function (response) {
       let res = JSON.parse(response);
-      console.log(res);
+
       if (res.status != "success") {
         window.location.href = "../login.html";
       }
@@ -37,8 +39,8 @@ $(document).ready(function () {
     success: function (response) {
       $("#loading-message").hide();
       let res = JSON.parse(response);
-      console.log(res);
-      setData(res.data[0]);
+      data = res.data[0];
+      setData();
     },
 
     error: function (xhr, status, error) {
@@ -49,6 +51,10 @@ $(document).ready(function () {
   $(".edit-btn").click(function () {
     $(".view-mode").hide();
     $(".edit-mode").show();
+    $("#email-input").val(data.email);
+    $("#dob-input").val(data.dob);
+    $("#age-input").val(data.age);
+    $("#contact-input").val(data.contact);
   });
 
   $(".cancel-btn").click(function () {
@@ -57,19 +63,28 @@ $(document).ready(function () {
   });
 
   $(".save-btn").click(function () {
-    var name = $("#name-input").val();
     var email = $("#email-input").val();
-    var phone = $("#phone-input").val();
+    var dob = $("#dob-input").val();
+    var age = $("#age-input").val();
+    var contact = $("#contact-input").val();
 
-    $(".view-mode")
-      .find("p:eq(0)")
-      .html("<strong>Name:</strong> " + name);
-    $(".view-mode")
-      .find("p:eq(1)")
-      .html("<strong>Email:</strong> " + email);
-    $(".view-mode")
-      .find("p:eq(2)")
-      .html("<strong>Phone:</strong> " + phone);
+    data = { ...data, dob, age, contact };
+    setData();
+
+    //send the updated data
+    $.ajax({
+      url: "../php/profile.php",
+      type: "POST",
+      data: { action: "update-data", email, data },
+      success: function (response) {
+        $("#loading-message").hide();
+        console.log(response);
+      },
+
+      error: function (xhr, status, error) {
+        console.log(error);
+      },
+    });
 
     $(".edit-mode").hide();
     $(".view-mode").show();
@@ -79,7 +94,6 @@ $(document).ready(function () {
 let loading = true;
 //logout
 $("#logout-button").click(function (e) {
-  console.log("Hi");
   e.preventDefault();
   $.ajax({
     type: "POST",
