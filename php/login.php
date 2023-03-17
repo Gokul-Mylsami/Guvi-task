@@ -4,6 +4,11 @@ $username = "root";
 $password = "gokul123";
 $database = "guvi";
 
+// $servername = "sql12.freesqldatabase.com";
+// $username = "sql12605910";
+// $password = "SLeaaLh6Gm";
+// $database = "sql12605910";
+
 $conn = mysqli_connect($servername, $username, $password, $database);
 
 if (!$conn) {
@@ -11,10 +16,10 @@ if (!$conn) {
 }
 
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+// $redis->connect('redis-13263.c270.us-east-1-3.ec2.cloud.redislabs.com', 13263);
+// $redis->auth('IzDni3FPBUerad8Q3F6qUdbOvBr42uBL');
 
-ini_set('session.save_handler', 'redis');
-ini_set('session.save_path', 'tcp://127.0.0.1:6379');
+$redis->connect('127.0.0.1', 6379);
 
 
 $email = $_POST["email"];

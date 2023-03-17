@@ -15,6 +15,26 @@ function setData() {
     .html("<strong>Contact:</strong> " + data.contact);
 }
 
+function showSuccessMessage(message) {
+  let successMessageContainer = $(".success-msg-container");
+  let successMessage = $(".success-msg");
+  successMessage.text(message);
+  successMessageContainer.show();
+  setTimeout(function () {
+    successMessageContainer.hide();
+  }, 5000);
+}
+
+function showErrorMessage(message) {
+  let errorMessageContainer = $(".err-msg-container");
+  let errorMessage = $(".err-msg");
+  errorMessage.text(message);
+  errorMessageContainer.show();
+  setTimeout(function () {
+    errorMessageContainer.hide();
+  }, 5000);
+}
+
 $(document).ready(function () {
   $("#loading-message").show();
   //check the session is valid or not
@@ -26,7 +46,12 @@ $(document).ready(function () {
       let res = JSON.parse(response);
 
       if (res.status != "success") {
-        window.location.href = "../login.html";
+        showErrorMessage(
+          "Something went wrong..., Login Again to Continue , You Will Be Redirected"
+        );
+        setTimeout(() => {
+          window.location.href = "../login.html";
+        }, 3000);
       }
     },
   });
@@ -65,6 +90,8 @@ $(document).ready(function () {
   $(".save-btn").click(function () {
     var email = $("#email-input").val();
     var dob = $("#dob-input").val();
+    var dobArray = dob.split("-");
+    dob = dobArray[2] + "-" + dobArray[1] + "-" + dobArray[0];
     var age = $("#age-input").val();
     var contact = $("#contact-input").val();
 
@@ -103,7 +130,11 @@ $("#logout-button").click(function (e) {
       let res = JSON.parse(response);
 
       if (res.status == "success") {
-        window.location.href = "../login.html";
+        showSuccessMessage(res.message + " Redirecting to login page...");
+
+        setTimeout(function () {
+          window.location.href = "../login.html";
+        }, 3000);
       }
     },
   });

@@ -1,3 +1,23 @@
+function setSuccessMessage(message) {
+  let successMessageContainer = $(".success-msg-container");
+  let successMessage = $(".success-msg");
+  successMessage.text(message);
+  successMessageContainer.show();
+  setTimeout(function () {
+    successMessageContainer.hide();
+  }, 5000);
+}
+
+function setErrorMessage(message) {
+  let errorMessageContainer = $(".err-msg-container");
+  let errorMessage = $(".err-msg");
+  errorMessage.text(message);
+  errorMessageContainer.show();
+  setTimeout(function () {
+    errorMessageContainer.hide();
+  }, 5000);
+}
+
 $("#register-form").submit(function (event) {
   event.preventDefault();
 
@@ -12,10 +32,22 @@ $("#register-form").submit(function (event) {
     data: formData,
 
     success: function (response) {
-      console.log(response); // log response data to console
+      let res = JSON.parse(response);
+      console.log(res);
+      if (res.status === "success") {
+        setSuccessMessage(
+          res.message + " You Will Be Redirected to login page....."
+        );
+
+        setTimeout(() => {
+          window.location.href = "../login.html";
+        }, 4000);
+      } else {
+        setErrorMessage(res.message);
+      }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(errorThrown); // log error message to console
+      console.log(errorThrown);
     },
   });
   console.log(formData);

@@ -20,6 +20,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
 $sql = "CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -37,6 +38,20 @@ if (!mysqli_query($conn, $sql))
     echo "Error creating table: " . mysqli_error($conn);
 }
 
+//check if the user is already exist
+$result = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
+if (mysqli_num_rows($result) > 0) {
+    $response = array(
+        "status" => "error",
+        "message" => "User already exists"
+    );
+    echo json_encode($response);
+    exit();
+}
+
+
+
+
 $uri = 'mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/';
 $manager = new MongoDB\Driver\Manager($uri);
 
@@ -53,27 +68,23 @@ $document = [
 ];
 
 $bulk = new MongoDB\Driver\BulkWrite;
-
-// Add insert operation to bulk write object
 $_id = $bulk->insert($document);
-
-// Create MongoDB write concern object
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-
-// Execute bulk write operation
 $result = $manager->executeBulkWrite("$database.$collection", $bulk, $writeConcern);
 
 
-// Print result
-
-printf("Inserted %d document(s)\n", $result->getInsertedCount());
 $mongoId = (string)$_id;
-printf($mongoId);
+
+
 $sql = "INSERT INTO users (email, password ,mongodbId) VALUES ('$email', '$password','$mongoId')";
 
 if(mysqli_query($conn,$sql))
 {
-    echo "Data inserted successfully";
+    $response = ['status' => 'success', 'message' => 'Registered successfully'];
+}else{
+    $response = ['status' => 'error', 'message' => 'Registration failed'];
 }
+
+echo json_encode($response);
 
 ?>

@@ -3,11 +3,13 @@
 $redis = new Redis();
 $redis->connect('127.0.0.1', 6379);
 
+// $redis->connect('redis-13263.c270.us-east-1-3.ec2.cloud.redislabs.com', 13263);
+// $redis->auth('IzDni3FPBUerad8Q3F6qUdbOvBr42uBL');
+
 if (isset($_POST['action']) && $_POST['action'] === 'logout') {
    
     $redisId = $_POST["redisId"];
     $redis->del("session:$redisId");
-    // Return a success message
     $response = array(
         "status" => "success",
         "message" => "Logout successful",

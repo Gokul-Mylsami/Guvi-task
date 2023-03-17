@@ -9,5 +9,10 @@
   width: 40rem;
 }
 
-.form-input {
+.success-msg-container {
+  display: none;
+}
+
+.err-msg-container {
+  display: none;
 }

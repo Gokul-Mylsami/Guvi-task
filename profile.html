@@ -14,12 +14,20 @@
 
     <div id="loading-message"><p>Loading....</p></div>
 
+    <div class="success-msg-container">
+      <p class="success-msg"></p>
+    </div>
+
+    <div class="err-msg-container">
+      <p class="err-msg"></p>
+    </div>
+
     <!-- view mode -->
     <div class="view-mode">
       <p><strong>Email:</strong></p>
-      <p><strong>DOB:</strong> john@example.com</p>
-      <p><strong>AGE:</strong> 555-1234</p>
-      <p><strong>CONTACT:</strong> 555-1234</p>
+      <p><strong>DOB:</strong></p>
+      <p><strong>AGE:</strong></p>
+      <p><strong>CONTACT:</strong></p>
       <button class="edit-btn">Edit</button>
     </div>
 
@@ -29,7 +37,7 @@
       <input type="text" id="email-input" disabled />
       <br />
       <label for="dob-input"><strong>DOB:</strong></label>
-      <input type="text" id="dob-input" />
+      <input type="date" id="dob-input" />
       <br />
       <label for="age-input"><strong>AGE:</strong></label>
       <input type="text" id="age-input" />

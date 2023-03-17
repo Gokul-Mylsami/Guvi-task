@@ -1,5 +1,14 @@
+function showErrorMessage(message) {
+  let errorMessageContainer = $(".err-msg-container");
+  let errorMessage = $(".err-msg");
+  errorMessage.text(message);
+  errorMessageContainer.show();
+  setTimeout(function () {
+    errorMessageContainer.hide();
+  }, 5000);
+}
+
 $(document).ready(function () {
-  console.log("Hi");
   $("#my-form").submit(function (event) {
     event.preventDefault();
 
@@ -15,14 +24,20 @@ $(document).ready(function () {
 
       success: function (response) {
         let res = JSON.parse(response);
-        console.log(res);
         if (res.status == "success") {
-          window.location.replace("../profile.html");
+          console.log(res.session_id);
           localStorage.setItem("redisId", res.session_id);
+
+          if (localStorage.getItem("redisId") != null) {
+            window.location.href = "../profile.html";
+          }
+        } else {
+          console.log(res.message);
+          showErrorMessage(res.message);
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.log(errorThrown); // log error message to console
+        console.log(errorThrown);
       },
     });
   });
