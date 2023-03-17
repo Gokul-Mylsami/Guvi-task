@@ -1,10 +1,14 @@
 <?php 
 
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+// $redis->connect('127.0.0.1', 6379);
 
-// $redis->connect('redis-13263.c270.us-east-1-3.ec2.cloud.redislabs.com', 13263);
-// $redis->auth('IzDni3FPBUerad8Q3F6qUdbOvBr42uBL');
+$redis->connect('redis-13263.c270.us-east-1-3.ec2.cloud.redislabs.com', 13263);
+$redis->auth('IzDni3FPBUerad8Q3F6qUdbOvBr42uBL');
+
+$manager = new MongoDB\Driver\Manager("mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/");
+$database = "guvi";
+$collection = "users";
 
 if (isset($_POST['action']) && $_POST['action'] === 'logout') {
    
@@ -42,12 +46,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'get-data'){
   $redisId = $_POST["redisId"];
   $sessionData = $redis->get("session:$redisId");
 
-  $email = $sessionData;
-  
-
-  $manager = new MongoDB\Driver\Manager("mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/");
-  $database = "guvi";
-  $collection = "users";
+  $email = $sessionData;  
 
   $filter = ['email' => $email];
 
@@ -76,9 +75,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'update-data'){
   $dob = $data['dob'];
   $contact = $data['contact'];
   $age = $data['age'];
-  $manager = new MongoDB\Driver\Manager("mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/");
-  $database = "guvi";
-  $collection = "users";
+
+
   $filter = ['email' => $email];
   $update = ['$set' => ['age' => $age, 'contact' => $contact , 'dob' => $dob]];
 

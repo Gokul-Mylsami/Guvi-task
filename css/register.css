@@ -1,9 +1,13 @@
-.login-container {
+.register-container {
   width: 1200px;
   margin: 0 auto;
 }
 
-.login-header {
+.signup-link {
+  text-decoration: none;
+}
+
+.register-header {
   margin-top: 3rem;
   padding: 0 2rem;
   display: flex;
@@ -11,32 +15,26 @@
   align-items: center;
 }
 
-.signup-link {
-  text-decoration: none;
-  color: #6534d9;
+.register-img-form-container {
+  display: flex;
+  align-items: center;
 }
 
-.login-img-wrapper {
+.register-img-wrapper {
   width: 36rem;
 }
 
-.login-img {
+.register-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.login-img-form-container {
-  display: flex;
-  align-items: center;
-  gap: 4rem;
-}
-
-.login-btn-container {
+.register-btn-container {
   margin: 2rem 0 5rem 0;
 }
 
-.login-btn-container button {
+.register-btn-container button {
   width: 24rem;
   padding: 1rem 2.6rem;
 
@@ -49,19 +47,19 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .login-container {
+  .register-container {
     width: 100%;
   }
 
-  .login-img-form-container {
+  .re-img-form-container {
     flex-direction: column;
   }
 
-  .login-img-wrapper {
+  .register-img-wrapper {
     width: 100%;
   }
 
-  .login-img {
+  .register-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -71,7 +69,21 @@
     margin-top: 1rem;
   }
 
-  .form-header {
+  .input-container input {
+    width: 23rem;
+  }
+
+  .register-btn-container button {
+    width: 23rem;
+  }
+
+  .register-img-form-container {
+    display: block;
+    margin-left: 1rem;
+  }
+
+  .register-form-header {
+    margin-top: 2rem;
     text-align: center;
   }
 }

@@ -10,46 +10,72 @@
     <title>Profile</title>
   </head>
   <body>
-    <h1>Profile</h1>
+    <div class="profile-container">
+      <div class="profile-header">
+        <h1>Profile</h1>
+        <div class="logout-btn-container" id="logout-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+            />
+          </svg>
+          <button class="logout-button">Logout</button>
+        </div>
+      </div>
+      <div id="loading-message"><p>Loading....</p></div>
 
-    <div id="loading-message"><p>Loading....</p></div>
+      <div class="success-msg-container">
+        <p class="success-msg"></p>
+      </div>
 
-    <div class="success-msg-container">
-      <p class="success-msg"></p>
+      <div class="err-msg-container">
+        <p class="err-msg"></p>
+      </div>
+      <div class="center-div">
+        <div class="profile-img-wrapper">
+          <img
+            src="./assets/profile/43022.jpg"
+            alt="profile-pic"
+            class="profile-pic"
+          />
+        </div>
+        <!-- view mode -->
+        <div class="view-mode">
+          <p><strong>Email:</strong></p>
+          <p><strong>DOB:</strong></p>
+          <p><strong>AGE:</strong></p>
+          <p><strong>CONTACT:</strong></p>
+          <button class="edit-btn btn">Edit</button>
+        </div>
+
+        <!-- edit mode -->
+        <div class="edit-mode" style="display: none">
+          <label for="email-input"><strong>Email:</strong></label>
+          <input type="text" id="email-input" disabled class="form-input" />
+          <br />
+          <label for="dob-input"><strong>DOB:</strong></label>
+          <input type="date" id="dob-input" class="form-input" />
+          <br />
+          <label for="age-input"><strong>AGE:</strong></label>
+          <input type="text" id="age-input" class="form-input" />
+          <br />
+          <label for="contact-input"><strong>CONTACT:</strong></label>
+          <input type="text" id="contact-input" class="form-input" />
+          <br />
+          <button class="save-btn btn">Save</button>
+          <button class="cancel-btn btn">Cancel</button>
+        </div>
+      </div>
     </div>
-
-    <div class="err-msg-container">
-      <p class="err-msg"></p>
-    </div>
-
-    <!-- view mode -->
-    <div class="view-mode">
-      <p><strong>Email:</strong></p>
-      <p><strong>DOB:</strong></p>
-      <p><strong>AGE:</strong></p>
-      <p><strong>CONTACT:</strong></p>
-      <button class="edit-btn">Edit</button>
-    </div>
-
-    <!-- edit mode -->
-    <div class="edit-mode" style="display: none">
-      <label for="email-input"><strong>Email:</strong></label>
-      <input type="text" id="email-input" disabled />
-      <br />
-      <label for="dob-input"><strong>DOB:</strong></label>
-      <input type="date" id="dob-input" />
-      <br />
-      <label for="age-input"><strong>AGE:</strong></label>
-      <input type="text" id="age-input" />
-      <br />
-      <label for="contact-input"><strong>CONTACT:</strong></label>
-      <input type="text" id="contact-input" />
-      <br />
-      <button class="save-btn">Save</button>
-      <button class="cancel-btn">Cancel</button>
-    </div>
-
-    <button class="logout-button" id="logout-button">Logout</button>
   </body>
   <script src="./js/profile.js" defer></script>
 </html>

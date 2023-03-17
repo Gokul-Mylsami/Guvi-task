@@ -26,6 +26,12 @@ $("#register-form").submit(function (event) {
     password: $("#password").val(),
     confirmPassword: $("#confirm-password").val(),
   };
+
+  if (formData.password !== formData.confirmPassword) {
+    setErrorMessage("Password and Confirm Password must be same");
+    return;
+  }
+
   $.ajax({
     type: "POST",
     url: "../php/register.php",

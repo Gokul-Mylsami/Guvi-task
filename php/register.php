@@ -4,15 +4,15 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 
 // Connect to the database
-// $servername = "sql12.freesqldatabase.com";
-// $username = "sql12605910";
-// $password = "SLeaaLh6Gm";
-// $database = "sql12605910";
+$servername = "sql12.freesqldatabase.com";
+$username = "sql12605910";
+$password = "SLeaaLh6Gm";
+$database = "sql12605910";
 
-$servername = "localhost";
-$username = "root";
-$password = "gokul123";
-$database = "guvi";
+// $servername = "localhost";
+// $username = "root";
+// $password = "gokul123";
+// $database = "guvi";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -48,8 +48,6 @@ if (mysqli_num_rows($result) > 0) {
     echo json_encode($response);
     exit();
 }
-
-
 
 
 $uri = 'mongodb+srv://Gokul:TN33BB3621@cluster0.x8urb.mongodb.net/';

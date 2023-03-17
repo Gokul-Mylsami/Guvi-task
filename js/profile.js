@@ -3,16 +3,16 @@ let data;
 function setData() {
   $(".view-mode")
     .find("p:eq(0)")
-    .html("<strong>Email:</strong> " + data.email);
+    .html("Email: " + data.email);
   $(".view-mode")
     .find("p:eq(1)")
-    .html("<strong>DOB:</strong> " + data.dob);
+    .html("DOB: " + data.dob);
   $(".view-mode")
     .find("p:eq(2)")
-    .html("<strong>Age:</strong> " + data.age);
+    .html("Age:" + data.age);
   $(".view-mode")
     .find("p:eq(3)")
-    .html("<strong>Contact:</strong> " + data.contact);
+    .html("Contact:" + data.contact);
 }
 
 function showSuccessMessage(message) {
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
       if (res.status != "success") {
         showErrorMessage(
-          "Something went wrong..., Login Again to Continue , You Will Be Redirected"
+          "Login Again to Continue... You Will Be Redirected...."
         );
         setTimeout(() => {
           window.location.href = "../login.html";
@@ -77,7 +77,11 @@ $(document).ready(function () {
     $(".view-mode").hide();
     $(".edit-mode").show();
     $("#email-input").val(data.email);
-    $("#dob-input").val(data.dob);
+    var dateString = data.dob;
+    var dateParts = dateString.split("-");
+    var dateObj = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    var formattedDate = dateObj.toISOString().slice(0, 10);
+    $("#dob-input").val(formattedDate);
     $("#age-input").val(data.age);
     $("#contact-input").val(data.contact);
   });
